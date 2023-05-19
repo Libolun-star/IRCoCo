@@ -14,7 +14,7 @@ parser.add_argument('--model_path', default=None, type=str, help='path to model 
 parser.add_argument('--save_dir', default='RL', type=str, help='path to save trained critic model checkpoints')
 
 # Dataloading
-parser.add_argument('--train-path', default='data/APPS/py150-source_code_test', type=str, help='path to training data')
+parser.add_argument('--train-path', default='data/APPS_test/py150-source_code_test', type=str, help='path to training data')
 parser.add_argument('--sample-mode', default='uniform_sol', help='sampling output programs following a uniform distribution by program population')
 
 # Model
