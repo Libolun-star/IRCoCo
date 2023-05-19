@@ -1,0 +1,1 @@
+<s> from django. utils. translation import ugettext_lazy as _ <EOL> from horizon import tabs <EOL> class NetworkProfileTab ( tabs. Tab ) :
