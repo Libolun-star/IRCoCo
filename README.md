@@ -15,7 +15,7 @@ python preprocess.py --base_dir=py150_files --output_dir=token_completion
 bash download.sh
 python preprocess.py --base_dir=token_completion --output_dir=token_completion
 ```
-Fine-tune LM through deep learning
+Fine-tune LM through Deep Learning
 -----------------------------------
 Refer to fine-tuning steps in CodeXGLUE
 
@@ -32,4 +32,10 @@ python generate_score.py --checkpoint_path PATH_OF_FINETUNED_GPT2 --mode score -
 
 ```
 python train_estimator.py --batch_size 8 --run_name A_NAME_AS_YOU_WANT --epoch 30 --data_path PATH_OF_GENERATED_DATASET --metric gpt2_bleu --language python (or java)
+
+```
+Fine-tune LM through Reinforcement learning
+-----------------------------------
+```
+python train.py --batch-size-per-replica=14 --grad-acc-steps=14 --epochs=10 --lr=5e-5 --save-freq=4000 --log-freq=500 --save_total_limit=20 --fp16 --tuning_mode=rl --model=gpt-2 --model_path=PATH_OF_FINETUNED_GPT2
 ```
