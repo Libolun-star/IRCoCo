@@ -52,6 +52,10 @@ pip install -e .
 ```
 Install other requirements
 ```
-pytorch 1.7.0
-tqdm 4.64.0
+torch == 1.9.1
+tqdm == 4.64.0
+python 3.7
+javalang == 0.13.0
+pyext==0.7
+deepspeed
 ```
