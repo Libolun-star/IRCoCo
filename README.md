@@ -39,6 +39,9 @@ python train_estimator.py --batch_size 8 --run_name A_NAME_AS_YOU_WANT --epoch 3
 ```
 Fine-tune LM through Reinforcement learning
 -----------------------------------
+
+```train.py``` uses sampled synthetic samples to train the code completion model using reinforcement learning. You can run the following command：
+
 ```
 python train.py --batch-size-per-replica=14 --grad-acc-steps=14 --epochs=10 --lr=5e-5 --save-freq=4000 --log-freq=500 --save_total_limit=20 --fp16 --tuning_mode=rl --model=gpt-2 --model_path=PATH_OF_FINETUNED_GPT2
 ```
