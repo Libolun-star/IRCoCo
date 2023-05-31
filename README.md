@@ -42,3 +42,9 @@ Fine-tune LM through Reinforcement learning
 ```
 python train.py --batch-size-per-replica=14 --grad-acc-steps=14 --epochs=10 --lr=5e-5 --save-freq=4000 --log-freq=500 --save_total_limit=20 --fp16 --tuning_mode=rl --model=gpt-2 --model_path=PATH_OF_FINETUNED_GPT2
 ```
+
+**Requirements**
+```
+pytorch 1.7.0
+pip install -r requirements.txt
+```
