@@ -44,7 +44,13 @@ python train.py --batch-size-per-replica=14 --grad-acc-steps=14 --epochs=10 --lr
 ```
 
 **Requirements**
+Install the transformers library from the source code (the current source code is developed from the original code of version 4.16.1):
+```
+cd transformers
+pip install -e .
+```
+Install other requirements
 ```
 pytorch 1.7.0
-pip install -r requirements.txt
+tqdm 4.64.0
 ```
