@@ -17,7 +17,7 @@ python preprocess.py --base_dir=token_completion --output_dir=token_completion
 ```
 **Sample RL training data**
 
-The training data of our reinforcement learning is obtained through model sampling and organized into the format of APPS. Please refer to the paper for details and see the ```data/RL_data``` folder for examples
+The training data of our reinforcement learning is obtained through model sampling and organized into the format of APPS. The data is processed by running the ```python arrow.py file```. Please refer to the paper for details and see the ```data/RL_data``` folder for examples
 
 Fine-tune LM through Deep Learning
 -----------------------------------
@@ -39,8 +39,23 @@ python train_estimator.py --batch_size 8 --run_name A_NAME_AS_YOU_WANT --epoch 3
 ```
 Fine-tune LM through Reinforcement learning
 -----------------------------------
+
+```train.py``` uses sampled synthetic samples to train the code completion model using reinforcement learning. You can run the following command：
+
 ```
 python train.py --batch-size-per-replica=14 --grad-acc-steps=14 --epochs=10 --lr=5e-5 --save-freq=4000 --log-freq=500 --save_total_limit=20 --fp16 --tuning_mode=rl --model=gpt-2 --model_path=PATH_OF_FINETUNED_GPT2
+```
+
+Model testing
+-----------------------------------
+In Model file, the ```metric.py``` and ```code/evaluator.py``` enables to train the model.
+
+```
+python metric.py
+```
+
+```
+python evaluator.py -a=evaluator/answers.json -p=evaluator/predictions.json
 ```
 
 **Requirements**
