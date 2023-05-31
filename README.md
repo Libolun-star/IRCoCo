@@ -17,7 +17,7 @@ python preprocess.py --base_dir=token_completion --output_dir=token_completion
 ```
 **Sample RL training data**
 
-The training data of our reinforcement learning is obtained through model sampling and organized into the format of APPS. Please refer to the paper for details and see the Data folder for examples
+The training data of our reinforcement learning is obtained through model sampling and organized into the format of APPS. Please refer to the paper for details and see the ```data/RL_data``` folder for examples
 
 Fine-tune LM through Deep Learning
 -----------------------------------
