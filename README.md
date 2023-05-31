@@ -1,5 +1,4 @@
-# IRCoCo
-
+# IRCoCo:Immediate Rewards-Driven Code Completion through Deep Reinforcement Learning
 Datasets  
 -----------------------------------
 **py150**
