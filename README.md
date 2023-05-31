@@ -3,7 +3,7 @@ Datasets
 -----------------------------------
 In the IRCoCo, we use three large-scale datasets for experiments, including one Java and one Python datasets. If you want to train the model, you must download the datasets.
 
-**PY150**
+**Py150**
 > To download and preprocess the dataset, navigate to data/py150 directory, and run
 ```
 bash download_and_extract.sh
