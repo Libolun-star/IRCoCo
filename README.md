@@ -1,8 +1,9 @@
 # IRCoCo:Immediate Rewards-Driven Code Completion through Deep Reinforcement Learning
 Datasets  
 -----------------------------------
-**py150**
 In IRCoCo, we experimented with two large data sets, including one Python and one Java. If you want to train the model, you must download the data set.
+
+**py150**
 > To download and preprocess the dataset, navigate to data/py150 directory, and run
 ```
 bash download_and_extract.sh
