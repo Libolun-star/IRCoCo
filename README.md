@@ -36,7 +36,6 @@ python generate_score.py --checkpoint_path PATH_OF_FINETUNED_GPT2 --mode score -
 
 ```
 python train_estimator.py --batch_size 8 --run_name A_NAME_AS_YOU_WANT --epoch 30 --data_path PATH_OF_GENERATED_DATASET --metric gpt2_bleu --language python (or java)
-
 ```
 Fine-tune LM through Reinforcement learning
 -----------------------------------
