@@ -15,6 +15,8 @@ python preprocess.py --base_dir=py150_files --output_dir=token_completion
 bash download.sh
 python preprocess.py --base_dir=token_completion --output_dir=token_completion
 ```
+**Sample RL training data**
+The training data of our reinforcement learning is obtained through model sampling and organized into the format of APPS. Please refer to the paper for details and see the Data folder for examples
 Fine-tune LM through Deep Learning
 -----------------------------------
 Refer to fine-tuning steps in CodeXGLUE
