@@ -23,7 +23,7 @@ Fine-tune LM through Deep Learning
 -----------------------------------
 Refer to fine-tuning steps in [CodeXGLUE](https://github.com/microsoft/CodeXGLUE/tree/main/Code-Code/CodeCompletion-token)
 
-Evaluator
+Code Completion Evaluator
 -----------------------------------
 **Generate training dataset for code completion evaluator**
 
