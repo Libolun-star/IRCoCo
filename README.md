@@ -48,6 +48,10 @@ Model testing
 In Model file, the ```metric.py``` and ```code/evaluator.py``` enables to train the model.
 
 ```
+python metric.py
+```
+
+```
 python evaluator/evaluator.py -a=evaluator/answers.json -p=evaluator/predictions.json
 ```
 
