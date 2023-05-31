@@ -21,7 +21,7 @@ The training data of our reinforcement learning is obtained through model sampli
 
 Fine-tune LM through Deep Learning
 -----------------------------------
-Refer to fine-tuning steps in CodeXGLUE
+Refer to fine-tuning steps in [CodeXGLUE](https://github.com/microsoft/CodeXGLUE/tree/main/Code-Code/CodeCompletion-token)
 
 Evaluator
 -----------------------------------
