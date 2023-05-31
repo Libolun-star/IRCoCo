@@ -52,7 +52,7 @@ python metric.py
 ```
 
 ```
-python evaluator/evaluator.py -a=evaluator/answers.json -p=evaluator/predictions.json
+python evaluator.py -a=evaluator/answers.json -p=evaluator/predictions.json
 ```
 
 **Requirements**
