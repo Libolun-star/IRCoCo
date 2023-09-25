@@ -22,13 +22,13 @@ if __name__ == '__main__':
     args = arg_parser()
     config = GPT2Config(n_embd=256, n_layer=4, n_head=4, n_ctx=512, num_labels=1)
     """修改codexglue"""
-    # tokenizer = GPT2Tokenizer.from_pretrained(pretrained_model_name_or_path='', sep_token='<EOL>', bos_token='<s>',
-    #                                           eos_token='</s>', pad_token='<pad>', unk_token='<|UNKNOWN|>',
-    #                                           additional_special_tokens=special_tokens)
-    tokenizer = RobertaTokenizer.from_pretrained(pretrained_model_name_or_path='',
-                                                 sep_token='<EOL>', bos_token='<s>',
-                                                 eos_token='</s>', pad_token='<pad>', unk_token='<|UNKNOWN|>',
-                                                 additional_special_tokens=special_tokens)
+    tokenizer = GPT2Tokenizer.from_pretrained(pretrained_model_name_or_path='', sep_token='<EOL>', bos_token='<s>',
+                                              eos_token='</s>', pad_token='<pad>', unk_token='<|UNKNOWN|>',
+                                              additional_special_tokens=special_tokens)
+    # tokenizer = RobertaTokenizer.from_pretrained(pretrained_model_name_or_path='',
+    #                                             sep_token='<EOL>', bos_token='<s>',
+    #                                             eos_token='</s>', pad_token='<pad>', unk_token='<|UNKNOWN|>',
+    #                                             additional_special_tokens=special_tokens)
 
     """修改codexglue"""
     # tokenizer = GPT2TokenizerFast.from_pretrained(args.cache_path)
