@@ -149,8 +149,17 @@ class Computer:
                 cbleu_scores.append(0.0)
                 completed_codes.append(completed_str)
                 continue
+            # BLEU
             bleu_score = self.bleu.compute(predictions=[[str(i) for i in output_seq]], references=[[[str(i) for i in answers]]],smooth=True)
             bleu_scores.append(bleu_score)
+
+            #Edit-sim
+            # pred = post_process(completed_str)
+            # gt = post_process(self.tokenizer.decode(answers))
+            # bleu_score_num = fuzz.ratio(pred, gt)/100
+            # bleu_score = {'bleu':bleu_score_num}
+            # bleu_scores.append(bleu_score)
+            
             cbleu_scores.append(self.cbleu.sentence_bleu([str(i) for i in answers], [str(i) for i in output_seq]))
             completed_codes.append(completed_str)
 
