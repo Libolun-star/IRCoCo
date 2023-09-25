@@ -51,14 +51,14 @@ def get_special_tokens(path):
         tokens.append(f"<CHAR_LIT:{lit}>")
     return tokens
 
-special_tokens = get_special_tokens('/home2/lbl/CodeRL/models/py150/literals.json')
+special_tokens = get_special_tokens('xxx')
 
 import Datasets.utils as dsutils
 """修改"""
-tokenizer = GPT2Tokenizer.from_pretrained(pretrained_model_name_or_path='/home2/lbl/CodeRL/models/py150-fintune', sep_token='<EOL>', bos_token='<s>',
+tokenizer = GPT2Tokenizer.from_pretrained(pretrained_model_name_or_path='xxx', sep_token='<EOL>', bos_token='<s>',
                                               eos_token='</s>', pad_token='<pad>', unk_token='<|UNKNOWN|>',
                                               additional_special_tokens=special_tokens)
-model = GPT2ForSequenceClassification.from_pretrained('/home2/lbl/CodeRL/models/py150-TCQE/checkpoint-last')
+model = GPT2ForSequenceClassification.from_pretrained('xxx')
 
 class APPSBaseDataset(torch.utils.data.Dataset):
     def __init__(self, dataroot, problem_dirs, model, max_tokens, sample_mode,
@@ -78,7 +78,7 @@ class APPSBaseDataset(torch.utils.data.Dataset):
         self.all_error_types, self.all_error_subtypes, self.all_baseline_error_types = [], [], []
         self.initialize()
         """修改"""
-        self.tokenizer = GPT2Tokenizer.from_pretrained(pretrained_model_name_or_path='/home2/lbl/CodeRL/models/py150-fintune', sep_token='<EOL>', bos_token='<s>',
+        self.tokenizer = GPT2Tokenizer.from_pretrained(pretrained_model_name_or_path='xxx', sep_token='<EOL>', bos_token='<s>',
                                               eos_token='</s>', pad_token='<pad>', unk_token='<|UNKNOWN|>',
                                               additional_special_tokens=special_tokens)
 
@@ -281,9 +281,9 @@ class APPSBaseDataset(torch.utils.data.Dataset):
         elif self.tuning_mode in ['rl']:
             gt_sample_idx = random.randint(0, len(self.samples) - 1)
             raw_gt_samples = self.pack_samples(gt_sample_idx)
-            inputs = self.sample_task(raw_gt_samples)  # inputs包括问题和ground-truth，用于后面深度学习训练用的
+            inputs = self.sample_task(raw_gt_samples)  
             """修改"""
-            item = self.gen_samples[idx]  # item里面包括输入的问题和DL微调时生成的代码，用于强化学习训练用的
+            item = self.gen_samples[idx]  
             # info = self.samples_info[idx]
 
             # g = raw_gt_samples[0][2]
@@ -357,8 +357,8 @@ class APPSBaseDataset(torch.utils.data.Dataset):
 
     def sample_task(self, samples, sample_type=None):
 
-        input_ids = []  # 输入问题序列
-        label_ids = []  # ground-truth，作为label
+        input_ids = []  
+        label_ids = []  
 
         if self.tuning_mode in ['critic'] and sample_type == 'gen':
             error_types = []
@@ -371,18 +371,18 @@ class APPSBaseDataset(torch.utils.data.Dataset):
 
             # q_str = "\nQUESTION:\n" + q_str + "\n" + s_str + "\n" + answer_type + "\nANSWER:\n"
 
-            question_token_ids = self.tokenizer.encode(q_str, verbose=False) # 问题input转为数字
+            question_token_ids = self.tokenizer.encode(q_str, verbose=False) 
             input_ids.extend(question_token_ids)
             answer_token_ids = input_ids
             # answer_token_ids = self.tokenizer.encode(a_str, verbose=False)
-            # if self.model not in ['codet5-base', 'codet5-large']:  # 进行了填充
+            # if self.model not in ['codet5-base', 'codet5-large']:  
             #     label_ids.extend([-100] * len(question_token_ids))
             #     answer_token_ids.append(self.tokenizer.eos_token_id)
             #     input_ids.extend(answer_token_ids)
             # label_ids.extend(answer_token_ids)
 
 
-        # Sanity checks and padding 完整性检查和填充
+      
         # input_ids_max_len = self.max_src_tokens if self.model in ['codet5-base', 'codet5-large'] else self.max_tokens
         # if len(input_ids) < input_ids_max_len:
         #     new_input_ids = [self.tokenizer.eos_token_id] * input_ids_max_len
@@ -407,7 +407,7 @@ class APPSBaseDataset(torch.utils.data.Dataset):
         if self.tuning_mode in ['critic'] and sample_type == 'gen':
             assert len(error_types) == 1
 
-            # Cut off the excess  剪掉多余的
+            
         input_ids = input_ids[:input_ids_max_len]
         # label_ids = label_ids[:self.max_tokens]
         label_ids = label_ids[:input_ids_max_len]
@@ -418,7 +418,7 @@ class APPSBaseDataset(torch.utils.data.Dataset):
         # input_ids = input_ids.reshape([256])
         # label_ids = label_ids.reshape([256])
 
-        out_sample = {  # 样例样本
+        out_sample = { 
             "input_ids": input_ids,
             "labels": label_ids
         }
@@ -484,13 +484,6 @@ class APPSBaseDataset(torch.utils.data.Dataset):
         input_ids_length = input_ids[0].__len__()
         rewards = []
         for label in labels[0]:
-            # reward_old = model(torch.tensor(input_ids))[0]
-            # input_ids[0].append(label)
-            # reward_new = model(torch.tensor(input_ids))[0]
-            # reward = reward_new - reward_old
-            # reward = float(reward.item().__format__('.4f'))
-            # rewards.append(reward)
-            # continue
 
             input_ids[0].append(label)
             reward_new = model(torch.tensor(input_ids))[0]
@@ -501,22 +494,15 @@ class APPSBaseDataset(torch.utils.data.Dataset):
         del input_ids[0][input_ids_length:]
         rewards.append(rewards[-1])
 
-        # # 计算50256的reward
-        # a = input_ids[0] + labels[0]
-        # special_input_ids = a
-        # special_reward_old = model(torch.tensor([special_input_ids]))[0]
-        # special_input_ids.append(50256)
-        # special_reward_new = model(torch.tensor([special_input_ids]))[0]
-        # special_reward = special_reward_new - special_reward_old
-        # special_reward = float(special_reward.item().__format__('.4f'))
 
-        if self.model not in ['codet5-base', 'codet5-large']:  # 进行了填充
+
+        if self.model not in ['codet5-base', 'codet5-large']:
             label_ids.extend([-100] * input_ids[0].__len__())
             labels[0].append(self.tokenizer.eos_token_id)
             input_ids[0].extend(labels[0])
         label_ids.extend(labels[0])
 
-        # Sanity checks and padding 完整性检查和填充
+     
         input_ids_max_len = self.max_src_tokens if self.model in ['codet5-base', 'codet5-large'] else self.max_tokens
         if len(input_ids[0]) < input_ids_max_len:
             new_input_ids = [self.tokenizer.eos_token_id] * input_ids_max_len
@@ -535,7 +521,7 @@ class APPSBaseDataset(torch.utils.data.Dataset):
         rewards_ids = rewards_ids + rewards
         rewards = [0] * input_ids_max_len
         rewards[:len(rewards_ids)] = rewards_ids
-        # 剪掉多余的
+    
         input_ids = input_ids[:self.max_src_tokens]
         rewards = rewards[:self.max_tokens]
         label_ids = label_ids[:self.max_tokens]
@@ -554,83 +540,3 @@ class APPSBaseDataset(torch.utils.data.Dataset):
             'label_ids': label_ids
         }
         return out_sample
-
-    def rl_task_last_reward(self,item,g):
-        label_ids = []
-        input_ids, labels = item
-        input_ids, labels = [input_ids], [labels]
-        input_ids_length = input_ids[0].__len__()
-        rewards = []
-
-        length = labels[0].__len__()
-        """1-0"""
-        a = tokenizer.encode(g)
-        for i in range(length):
-            if a.__len__() > i:
-                if labels[0][i] == a[i]:
-                    rewards.append(1)
-                else:
-                    rewards.append(0)
-            else:
-                break
-        """线性衰减"""
-        # import random
-        # a = 1
-        # for i in range(length + 1):
-        #     rewards.append(a)
-        #     a = a - a*0.01
-        """中间奖励为0"""
-        # rewards = [0] * (length - 1)
-        # pre = [tokenizer.decode(labels[0])]
-        # ref = [g]
-        # bleu = nltk_sentence_bleu(pre,ref)
-        # rewards.append(bleu)
-        """全为0"""
-        # rewards = [0] * length
-        # rewards.append(0)
-
-        if self.model not in ['codet5-base', 'codet5-large']:  # 进行了填充
-            label_ids.extend([-100] * input_ids[0].__len__())
-            labels[0].append(self.tokenizer.eos_token_id)
-            input_ids[0].extend(labels[0])
-        label_ids.extend(labels[0])
-
-        # Sanity checks and padding 完整性检查和填充
-        input_ids_max_len = self.max_src_tokens if self.model in ['codet5-base', 'codet5-large'] else self.max_tokens
-        if len(input_ids[0]) < input_ids_max_len:
-            new_input_ids = [self.tokenizer.eos_token_id] * input_ids_max_len
-            new_input_ids[:len(input_ids[0])] = input_ids[0]
-            input_ids = new_input_ids
-
-            if self.model not in ['codet5-base', 'codet5-large']:
-                new_label_ids = [-100] * input_ids_max_len
-                new_label_ids[:len(label_ids)] = label_ids
-                label_ids = new_label_ids
-
-        # input_ids = input_ids[:input_ids_max_len]
-        # label_ids = label_ids[:self.max_tokens]
-
-        rewards_ids = [0] * input_ids_length
-        rewards_ids = rewards_ids + rewards
-        rewards = [0] * input_ids_max_len
-        rewards[:len(rewards_ids)] = rewards_ids
-        # 剪掉多余的
-        input_ids = input_ids[:self.max_src_tokens]
-        rewards = rewards[:self.max_tokens]
-        label_ids = label_ids[:self.max_tokens]
-
-        input_ids = torch.LongTensor(input_ids)
-        rewards = torch.Tensor(rewards)
-        label_ids = torch.LongTensor(label_ids)
-
-        # input_ids = input_ids.reshape([256])
-        # rewards = rewards.reshape([256])
-        # label_ids = label_ids.reshape([256])
-
-        out_sample = {
-            "input_ids": input_ids,
-            "rewards": rewards,
-            'label_ids': label_ids
-        }
-        return out_sample
-
