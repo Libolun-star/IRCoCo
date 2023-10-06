@@ -23,7 +23,7 @@ Fine-tune LM through Deep Learning
 -----------------------------------
 Refer to fine-tuning steps in [CodeXGLUE](https://github.com/microsoft/CodeXGLUE/tree/main/Code-Code/CodeCompletion-token)
 
-Code Completion Evaluator
+Code Completion Evaluator (Take Bleu as an example)
 -----------------------------------
 **Generate training dataset for code completion evaluator**
 
@@ -32,7 +32,7 @@ We use the GPT-2 model as an example to show the steps
 python generate_score.py --checkpoint_path PATH_OF_FINETUNED_GPT2 --mode score --model gpt2 --batch_size 1 --text_length 256 --min_query_len 10 --dataset_name data/final/jsonl --language python (or java)
 ```
 
-**Training code completion evaluator (Take Bleu as an example)**
+**Training code completion evaluator **
 
 ```
 python train_estimator.py --batch_size 8 --run_name A_NAME_AS_YOU_WANT --epoch 30 --data_path PATH_OF_GENERATED_DATASET --metric gpt2_bleu --language python (or java)
