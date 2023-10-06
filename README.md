@@ -32,7 +32,7 @@ We use the GPT-2 model as an example to show the steps
 python generate_score.py --checkpoint_path PATH_OF_FINETUNED_GPT2 --mode score --model gpt2 --batch_size 1 --text_length 256 --min_query_len 10 --dataset_name data/final/jsonl --language python (or java)
 ```
 
-**Training code completion evaluator**
+**Training code completion evaluator (Take Bleu as an example)**
 
 ```
 python train_estimator.py --batch_size 8 --run_name A_NAME_AS_YOU_WANT --epoch 30 --data_path PATH_OF_GENERATED_DATASET --metric gpt2_bleu --language python (or java)
