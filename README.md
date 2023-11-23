@@ -1,4 +1,4 @@
-# IRCoCo:IRCoCo: Immediate Rewards-Guided Deep Reinforcement Learning for Code Completion
+# IRCoCo: Immediate Rewards-Guided Deep Reinforcement Learning for Code Completion
 Datasets  
 -----------------------------------
 In the IRCoCo, we use three large-scale datasets for experiments, including one Java and one Python datasets. If you want to train the model, you must download the datasets.
