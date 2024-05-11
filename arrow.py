@@ -10,7 +10,7 @@ train_set = load_from_disk(os.path.join(data_path, 'train'))
 
 
 
-# # 把数据集遍历到一个文件夹里面0,1,2,3.....
+
 path = 'you choose path'
 
 for i in range(len(train_set)):
@@ -61,7 +61,7 @@ for i in range(len(train_set)):
 
 
 
-# """将CodeXglue中的train.txt文件遍历为code completion evaluator中用到的json文件"""
+
 # path = 'train.txt'
 # with open(path) as f:
 #     line = f.readlines()
